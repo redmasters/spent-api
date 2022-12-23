@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: spent-api
+
+  datasource:
+    url: ${SPENT_DB_URL}
+    username: ${SPENT_DB_USERNAME}
+    password: ${SPENT_DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
