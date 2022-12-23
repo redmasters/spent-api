@@ -1,13 +1,16 @@
 # CHANGELOG
 
 ## [Unreleased]
-* Create a expense;
 * List all expenses;
 * List all expenses by id;
-* Update a expense;
-* Logic delete a expense;
-* Permanent delete a expense;
+* Update an expense;
+* Logic delete an expense;
+* Permanent delete an expense;
 * Create test services;
 * Add exception handler;
 * Configure docker;
 * Add and Configure swagger;
+
+## [v1.0.0]() - 2020-05-01
+## Added 
+* Create an expense;
