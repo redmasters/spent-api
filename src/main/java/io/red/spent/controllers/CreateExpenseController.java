@@ -1,12 +1,14 @@
-package io.red.spent.controllers.requests;
+package io.red.spent.controllers;
 
+import io.red.spent.controllers.requests.ExpenseRequest;
 import io.red.spent.services.CreateExpenseService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/v1/expense")
@@ -19,7 +21,7 @@ public class CreateExpenseController {
     }
 
     @PostMapping
-    public ResponseEntity<String> createExpense(@RequestBody @Validated ExpenseRequest request) {
+    public ResponseEntity<String> createExpense(@RequestBody @Valid ExpenseRequest request) {
         return createExpenseService.createExpense(request);
     }
 }

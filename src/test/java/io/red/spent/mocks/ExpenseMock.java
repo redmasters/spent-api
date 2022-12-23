@@ -1,2 +1,60 @@
-package io.red.spent.mocks;public class ExpenseMock {
+package io.red.spent.mocks;
+
+import io.red.spent.controllers.requests.ExpenseRequest;
+import io.red.spent.models.Expense;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.UUID;
+
+public class ExpenseMock {
+    public static final String NAME_PERSON = "Denji";
+    public static final String DESCRIPTION = "A description";
+    public static final String DATE_TIME = "2021-01-01T00:00:00";
+    public static final Double AMOUNT = 100.0;
+    public static final Long TAG_ID = 1L;
+    public static final String TAG_NAME = "Food";
+
+    public static Expense toModel(){
+        return new Expense(
+                UUID.randomUUID(),
+                NAME_PERSON,
+                DESCRIPTION,
+                LocalDateTime.parse(DATE_TIME),
+                AMOUNT);
+    }
+
+    public static ExpenseRequest toRequest(){
+        return new ExpenseRequest(
+                NAME_PERSON,
+                DESCRIPTION,
+                DATE_TIME,
+                AMOUNT,
+                List.of(new ExpenseRequest.Tag(TAG_NAME)));
+    }
+
+    public static ExpenseRequest nullRequest() {
+        return new ExpenseRequest(
+                null,
+                null,
+                null,
+                null,
+                null);
+
+
+    }
+
+    public static Expense expenseCreated() {
+        return new Expense(
+                UUID.randomUUID(),
+                NAME_PERSON,
+                DESCRIPTION,
+                LocalDateTime.parse(DATE_TIME),
+                AMOUNT);
+    }
+    public static ResponseEntity<String> responseEntity() {
+        return ResponseEntity.status(HttpStatus.CREATED).body("Expense created");
+    }
 }
