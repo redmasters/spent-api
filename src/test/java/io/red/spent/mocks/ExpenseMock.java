@@ -1,11 +1,14 @@
 package io.red.spent.mocks;
 
 import io.red.spent.controllers.requests.ExpenseRequest;
+import io.red.spent.controllers.responses.ExpenseResponse;
 import io.red.spent.models.Expense;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -17,7 +20,7 @@ public class ExpenseMock {
     public static final Long TAG_ID = 1L;
     public static final String TAG_NAME = "Food";
 
-    public static Expense toModel(){
+    public static Expense toEntity() {
         return new Expense(
                 UUID.randomUUID(),
                 NAME_PERSON,
@@ -26,7 +29,7 @@ public class ExpenseMock {
                 AMOUNT);
     }
 
-    public static ExpenseRequest toRequest(){
+    public static ExpenseRequest toRequest() {
         return new ExpenseRequest(
                 NAME_PERSON,
                 DESCRIPTION,
@@ -54,7 +57,37 @@ public class ExpenseMock {
                 LocalDateTime.parse(DATE_TIME),
                 AMOUNT);
     }
+
     public static ResponseEntity<String> responseEntity() {
         return ResponseEntity.status(HttpStatus.CREATED).body("Expense created");
     }
+
+    public static ExpenseResponse toResponse() {
+        return new ExpenseResponse(
+                UUID.randomUUID(),
+                NAME_PERSON,
+                DESCRIPTION,
+                DATE_TIME,
+                AMOUNT);
+    }
+
+    public static List<ExpenseResponse> toListResponse() {
+        List<Expense> expenseList = Arrays.asList(toEntity());
+        List<ExpenseResponse> expenseResponseList = new ArrayList<>();
+        expenseList.forEach(expense -> {
+            expenseResponseList.add(new ExpenseResponse(
+                    expense.getId(),
+                    expense.getNamePerson(),
+                    expense.getDescription(),
+                    expense.getDateTime().toString(),
+                    expense.getAmount()
+            ));
+        });
+        return expenseResponseList;
+    }
+
+    public static List<Expense> toListEntity() {
+        return List.of(toEntity());
+    }
+
 }
