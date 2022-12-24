@@ -37,7 +37,7 @@ public class ExpenseMock {
 
     public static ExpenseRequest nullRequest() {
         return new ExpenseRequest(
-                null,
+                "",
                 null,
                 null,
                 null,

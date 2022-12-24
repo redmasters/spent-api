@@ -3,7 +3,6 @@ package io.red.spent.services;
 import io.red.spent.controllers.requests.ExpenseRequest;
 import io.red.spent.models.Expense;
 import io.red.spent.repositories.ExpenseRepository;
-import org.hibernate.service.spi.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,9 +21,6 @@ public class CreateExpenseService {
     }
 
     public ResponseEntity<String> createExpense(ExpenseRequest request) {
-        if (request == null) {
-            throw new ServiceException("Expense is invalid");
-        }
 
         final var newExpense = new Expense(
                 request.namePerson(),
@@ -32,8 +28,9 @@ public class CreateExpenseService {
                 LocalDateTime.parse(request.dateTime()),
                 request.amount()
         );
-        LOGGER.info("Expense for {} created", request.namePerson());
         expenseRepository.save(newExpense);
+
+        LOGGER.info("Expense for {} created", request.namePerson());
         return ResponseEntity.status(HttpStatus.CREATED).body("Expense created");
     }
 }

@@ -62,7 +62,6 @@ class CreateExpenseControllerTest {
                         .content(json)
                         .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
                 .andExpect(status().isCreated());
-//                .andExpect(jsonPath("$.namePerson").isNotEmpty());
 
         verify(service, atLeastOnce()).createExpense(request);
         assertNotNull(response);

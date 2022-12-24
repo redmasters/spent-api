@@ -9,9 +9,11 @@
 * Create test services;
 * Add exception handler;
 * Configure docker;
-* Add and Configure swagger;
+* Add Configure swagger;
+* Add tags;
+* Tag expenses;
 
-## [v1.0.0]() - 2020-05-01
+## [v1.0.0]() - 2020-12-23
 ## Added 
 * Create an expense;
 * Test create expense service;
