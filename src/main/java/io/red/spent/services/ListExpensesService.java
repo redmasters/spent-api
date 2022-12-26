@@ -27,7 +27,7 @@ public class ListExpensesService {
         List<ExpenseResponse> expenseReponse = new ArrayList<>();
 
         final var listExpense = repository.findAll(page);
-        LOGGER.info("Found {} expenses", listExpense.getSize());
+        LOGGER.info("Found {} expenses", listExpense.getContent().size());
 
         listExpense.forEach(expense -> {
             expenseReponse.add(new ExpenseResponse(
