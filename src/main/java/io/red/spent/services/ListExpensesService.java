@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ListExpensesService {
@@ -41,5 +42,18 @@ public class ListExpensesService {
 
         return new PageImpl<>(expenseReponse, page, listExpense.getSize());
 
+    }
+
+    public ExpenseResponse listBy(UUID id){
+        final var expense = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found"));
+
+        return new ExpenseResponse(
+                expense.getId(),
+                expense.getNamePerson(),
+                expense.getDescription(),
+                expense.getDateTime().toString(),
+                expense.getAmount()
+        );
     }
 }
