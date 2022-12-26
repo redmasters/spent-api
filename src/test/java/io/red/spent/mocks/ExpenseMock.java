@@ -3,6 +3,9 @@ package io.red.spent.mocks;
 import io.red.spent.controllers.requests.ExpenseRequest;
 import io.red.spent.controllers.responses.ExpenseResponse;
 import io.red.spent.models.Expense;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -90,4 +93,16 @@ public class ExpenseMock {
         return List.of(toEntity());
     }
 
+    public static Page<ExpenseResponse> toPageResponse(Pageable page) {
+        final var expenseList = toListResponse();
+        List<ExpenseResponse> expenseResponseList = new ArrayList<>();
+        expenseResponseList.add(toResponse());
+        return new PageImpl<>(expenseResponseList, page, expenseList.size());
+    }
+
+    public static Page<Expense> toPage(Pageable page) {
+        final var expenseList = toListEntity();
+        return new PageImpl<>(expenseList, page, expenseList.size());
+
+    }
 }

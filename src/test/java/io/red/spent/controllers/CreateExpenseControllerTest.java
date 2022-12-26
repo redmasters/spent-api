@@ -1,7 +1,6 @@
-package io.red.spent.controllers.requests;
+package io.red.spent.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.red.spent.controllers.CreateExpenseController;
 import io.red.spent.mocks.ExpenseMock;
 import io.red.spent.services.CreateExpenseService;
 import org.junit.jupiter.api.BeforeEach;

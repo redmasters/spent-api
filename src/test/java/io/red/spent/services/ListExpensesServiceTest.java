@@ -9,32 +9,32 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.util.List;
 
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
 @ExtendWith(SpringExtension.class)
-class ListExpensesServicesTest {
+class ListExpensesServiceTest {
 
     @Mock
     ExpenseRepository repository;
 
     @InjectMocks
-    ListExpensesServices services;
+    ListExpensesService services;
 
     @Test
     @DisplayName("Should return a list of all expenses")
     void shouldReturnListOfAllExpenses() {
-        final var listExpense = ExpenseMock.toListResponse();
-        final var litEntitty = ExpenseMock.toListEntity();
-        when(repository.findAll())
-                .thenReturn(litEntitty);
+        Pageable page = Pageable.unpaged();
 
-        List<ExpenseResponse> responseList = services.listAll();
+        final var pageExpense = ExpenseMock.toPage(page);
+        when(repository.findAll(page)).thenReturn(pageExpense);
+
+        Page<ExpenseResponse> responseList = services.listAll(page);
         Assertions.assertFalse(responseList.isEmpty());
     }
 }
