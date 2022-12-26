@@ -45,9 +45,11 @@ public class ListExpensesService {
     }
 
     public ExpenseResponse listBy(UUID id){
+        LOGGER.info("Searching expense by id {}", id);
         final var expense = repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Expense not found"));
 
+        LOGGER.info("Found expense of {}", expense.getNamePerson());
         return new ExpenseResponse(
                 expense.getId(),
                 expense.getNamePerson(),
