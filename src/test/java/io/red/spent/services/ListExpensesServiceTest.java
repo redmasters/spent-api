@@ -27,7 +27,7 @@ class ListExpensesServiceTest {
     ListExpensesService services;
 
     @Test
-    @DisplayName("Should return a list of all expenses")
+    @DisplayName("Should return a paginated list of all expenses")
     void shouldReturnListOfAllExpenses() {
         Pageable page = Pageable.unpaged();
 
