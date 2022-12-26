@@ -1,10 +1,10 @@
-### Descricao
+### Description
 
-<!-- Por favor explique as mudancas que vc fez aqui -->
+<!-- Please explain your changes here -->
 
 ### Checklist
 
-- [ ] Codigo Compila corretamente;
-- [ ] Testes unitarios;
-- [ ] Todos os teses unitarios passam;
-- [ ] Changelog atualizado
+- [ ]  Code Compiles correctly;
+- [ ]  Unit Tests;
+- [ ]  All unit theses pass;
+- [ ]  Changelog updated
