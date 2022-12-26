@@ -29,7 +29,7 @@ class CreateExpenseServiceTest {
     void shoudCreateAValidExpense() {
         //scenery
         final var request = ExpenseMock.toRequest();
-        final var expenseModel = ExpenseMock.toModel();
+        final var expenseModel = ExpenseMock.toEntity();
         when(repository.save(any(Expense.class)))
                 .thenReturn(expenseModel);
 
