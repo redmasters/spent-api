@@ -1,11 +1,8 @@
 # CHANGELOG
 
 ## [Unreleased]
-* List all expenses by id;
-* Update an expense;
 * Logic delete an expense;
 * Permanent delete an expense;
-* Create test services;
 * Add exception handler;
 * Configure docker;
 * Add Configure swagger;
