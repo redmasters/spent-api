@@ -12,6 +12,12 @@
 * Add tags;
 * Tag expenses;
 
+## [v1.2.0]() - 2020-12-26
+## Added
+* List expense by id
+* Test list expense by id on service layer;
+* Test list expense by id on controller layer;
+
 ## [v1.1.0]() - 2020-12-26
 ## Added 
 * List all expenses paginated
