@@ -34,7 +34,7 @@ class CreateExpenseControllerTest {
 
     ObjectMapper objectMapper;
 
-    String BASE_URL = "/api/v1/expense";
+    String BASE_URL = "/v1/expense";
 
     @BeforeEach
     void setUp() {

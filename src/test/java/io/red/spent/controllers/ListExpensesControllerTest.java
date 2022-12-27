@@ -26,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ExtendWith(SpringExtension.class)
 class ListExpensesControllerTest {
 
-    static final String BASE_URL = "/api/v1/expense";
+    static final String BASE_URL = "/v1/expense";
     ObjectMapper mapper;
 
     MockMvc mockMvc;
