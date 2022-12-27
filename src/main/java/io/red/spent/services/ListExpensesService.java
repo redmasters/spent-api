@@ -27,7 +27,7 @@ public class ListExpensesService {
 
         List<ExpenseResponse> expenseReponse = new ArrayList<>();
 
-        final var listExpense = repository.findAll(page);
+        final var listExpense = repository.findAllByDeleted(false);
         LOGGER.info("Found {} expenses", listExpense.getContent().size());
 
         listExpense.forEach(expense -> {
@@ -46,7 +46,7 @@ public class ListExpensesService {
 
     public ExpenseResponse listBy(UUID id){
         LOGGER.info("Searching expense by id {}", id);
-        final var expense = repository.findById(id)
+        final var expense = repository.findByIdAndDeleted(id, false)
                 .orElseThrow(() -> new RuntimeException("Expense not found"));
 
         LOGGER.info("Found expense of {}", expense.getNamePerson());
