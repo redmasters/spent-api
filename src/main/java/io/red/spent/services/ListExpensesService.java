@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ListExpensesService {
@@ -27,7 +28,7 @@ public class ListExpensesService {
         List<ExpenseResponse> expenseReponse = new ArrayList<>();
 
         final var listExpense = repository.findAll(page);
-        LOGGER.info("Found {} expenses", listExpense.getSize());
+        LOGGER.info("Found {} expenses", listExpense.getContent().size());
 
         listExpense.forEach(expense -> {
             expenseReponse.add(new ExpenseResponse(
@@ -41,5 +42,20 @@ public class ListExpensesService {
 
         return new PageImpl<>(expenseReponse, page, listExpense.getSize());
 
+    }
+
+    public ExpenseResponse listBy(UUID id){
+        LOGGER.info("Searching expense by id {}", id);
+        final var expense = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found"));
+
+        LOGGER.info("Found expense of {}", expense.getNamePerson());
+        return new ExpenseResponse(
+                expense.getId(),
+                expense.getNamePerson(),
+                expense.getDescription(),
+                expense.getDateTime().toString(),
+                expense.getAmount()
+        );
     }
 }

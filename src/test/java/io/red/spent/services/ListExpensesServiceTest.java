@@ -13,7 +13,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.Optional;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
@@ -27,7 +33,7 @@ class ListExpensesServiceTest {
     ListExpensesService services;
 
     @Test
-    @DisplayName("Should return a list of all expenses")
+    @DisplayName("Should return a paginated list of all expenses")
     void shouldReturnListOfAllExpenses() {
         Pageable page = Pageable.unpaged();
 
@@ -36,5 +42,21 @@ class ListExpensesServiceTest {
 
         Page<ExpenseResponse> responseList = services.listAll(page);
         Assertions.assertFalse(responseList.isEmpty());
+    }
+
+    @Test
+    @DisplayName("Shoud return a valid expense by UUID")
+    void shouldReturnExpenseByUUID() {
+
+        final var expense = ExpenseMock.toEntity();
+        ReflectionTestUtils.setField(expense, "id", UUID.randomUUID());
+
+        when(repository.findById(any(UUID.class)))
+                .thenReturn(Optional.of(expense));
+
+        final var responseExpense = services.listBy(UUID.randomUUID());
+        assertNotNull(responseExpense.expenseId());
+        assertNotNull(responseExpense.expenseId());
+
     }
 }
