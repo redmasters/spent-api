@@ -41,17 +41,6 @@ public class ExpenseMock {
                 List.of(new ExpenseRequest.Tag(TAG_NAME)));
     }
 
-    public static ExpenseRequest nullRequest() {
-        return new ExpenseRequest(
-                "",
-                null,
-                null,
-                null,
-                null);
-
-
-    }
-
     public static Expense expenseCreated() {
         return new Expense(
                 UUID.randomUUID(),

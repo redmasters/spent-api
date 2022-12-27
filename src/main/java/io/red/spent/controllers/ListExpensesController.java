@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.UUID;
 
-@RequestMapping("/api/v1/expense")
+@RequestMapping("/v1/expense")
 @RestController
 public class ListExpensesController {
     private final ListExpensesService services;
