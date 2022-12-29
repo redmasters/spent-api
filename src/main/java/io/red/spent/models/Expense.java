@@ -71,4 +71,5 @@ public class Expense {
     public void delete(){
         this.deleted = true;
     }
+
 }

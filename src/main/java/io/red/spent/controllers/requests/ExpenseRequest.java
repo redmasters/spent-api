@@ -7,7 +7,7 @@ public record ExpenseRequest(
         String description,
         String dateTime,
         Double amount,
-        List<Tag> tags
+        List<String> tagName
 ) {
     public record Tag(
             String tagName

@@ -3,6 +3,8 @@ package io.red.spent.mocks;
 import io.red.spent.controllers.requests.ExpenseRequest;
 import io.red.spent.controllers.responses.ExpenseResponse;
 import io.red.spent.models.Expense;
+import io.red.spent.models.ExpenseTag;
+import io.red.spent.models.Tag;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -39,7 +41,7 @@ public class ExpenseMock {
                 DESCRIPTION,
                 DATE_TIME,
                 AMOUNT,
-                List.of(new ExpenseRequest.Tag(TAG_NAME)));
+                List.of(TAG_NAME, TAG_NAME));
     }
 
     public static Expense expenseCreated() {
@@ -61,19 +63,22 @@ public class ExpenseMock {
                 NAME_PERSON,
                 DESCRIPTION,
                 DATE_TIME,
-                AMOUNT);
+                AMOUNT,
+                List.of(TAG_NAME, TAG_NAME));
     }
 
     public static List<ExpenseResponse> toListResponse() {
         List<Expense> expenseList = Arrays.asList(toEntity());
         List<ExpenseResponse> expenseResponseList = new ArrayList<>();
         expenseList.forEach(expense -> {
+
             expenseResponseList.add(new ExpenseResponse(
                     expense.getId(),
                     expense.getNamePerson(),
                     expense.getDescription(),
                     expense.getDateTime().toString(),
-                    expense.getAmount()
+                    expense.getAmount(),
+                    List.of(TAG_NAME)
             ));
         });
         return expenseResponseList;
@@ -94,5 +99,15 @@ public class ExpenseMock {
         final var expenseList = toListEntity();
         return new PageImpl<>(expenseList, page, expenseList.size());
 
+    }
+
+    public static Tag toTag() {
+        return new Tag(TAG_ID, TAG_NAME);
+    }
+    public static ExpenseTag toExpenseTag() {
+        return new ExpenseTag(
+                toEntity(),
+                toTag()
+        );
     }
 }
