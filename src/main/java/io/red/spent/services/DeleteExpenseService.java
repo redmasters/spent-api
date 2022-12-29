@@ -1,5 +1,7 @@
 package io.red.spent.services;
 
+import io.red.spent.controllers.exceptions.BusinessException;
+import io.red.spent.controllers.exceptions.ExpenseException;
 import io.red.spent.repositories.ExpenseRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,10 +22,10 @@ public class DeleteExpenseService {
     public ResponseEntity<String> deleteLogicBy(UUID id) {
         LOGGER.info("Deleting expense with id {}", id);
         final var expense = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() -> new ExpenseException("Expense not found"));
 
         if(expense.isDeleted()){
-            throw new RuntimeException("Expense already deleted");
+            throw new BusinessException("Expense already deleted");
         }
 
         expense.delete();
@@ -36,7 +38,7 @@ public class DeleteExpenseService {
     public void deleteExpenseBy(UUID id) {
         LOGGER.info("Deleting expense with id {}", id);
         final var expense = repository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() -> new ExpenseException("Expense not found"));
 
         repository.delete(expense);
         LOGGER.info("Expense Deleted");

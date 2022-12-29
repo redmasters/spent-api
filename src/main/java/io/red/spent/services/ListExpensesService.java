@@ -1,5 +1,6 @@
 package io.red.spent.services;
 
+import io.red.spent.controllers.exceptions.ExpenseException;
 import io.red.spent.controllers.responses.ExpenseResponse;
 import io.red.spent.repositories.ExpenseRepository;
 import org.slf4j.Logger;
@@ -47,7 +48,7 @@ public class ListExpensesService {
     public ExpenseResponse listBy(UUID id){
         LOGGER.info("Searching expense by id {}", id);
         final var expense = repository.findByIdAndDeleted(id, false)
-                .orElseThrow(() -> new RuntimeException("Expense not found"));
+                .orElseThrow(() -> new ExpenseException("Expense not found"));
 
         LOGGER.info("Found expense of {}", expense.getNamePerson());
         return new ExpenseResponse(
