@@ -11,6 +11,7 @@
 ## [v1.5.0]() - 2022-12-28
 ### Added
 * Permanent delete an expense;
+* Testes for permanent delete an expense;
 
 ## [v1.4.0]() - 2022-12-28
 ### Added
