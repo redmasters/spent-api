@@ -1,11 +1,15 @@
 # CHANGELOG
 
 ## [Unreleased]
-* Add exception handler;
 * Configure docker;
 * Add Configure swagger;
 * Add tags;
 * Tag expenses;
+
+
+## [v1.6.0]() - 2022-12-28
+### Added
+* Add exception handler;
 
 
 ## [v1.5.0]() - 2022-12-28
