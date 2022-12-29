@@ -22,10 +22,15 @@ public class Expense {
     private LocalDateTime dateTime;
     @Column(name = "expense_amount")
     private Double amount;
+
+    @Column(name = "expense_deleted")
+    private boolean deleted = false;
     public Expense() {
     }
 
-    public Expense(UUID id, String namePerson, String description, LocalDateTime dateTime, Double amount) {
+    public Expense(UUID id, String namePerson,
+                   String description, LocalDateTime dateTime,
+                   Double amount) {
         this.id = id;
         this.namePerson = namePerson;
         this.description = description;
@@ -58,5 +63,12 @@ public class Expense {
 
     public Double getAmount() {
         return amount;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+    public void delete(){
+        this.deleted = true;
     }
 }

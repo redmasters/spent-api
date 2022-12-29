@@ -12,11 +12,10 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.UUID;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
@@ -28,28 +27,23 @@ class UpdateExpenseServiceTest {
     UpdateExpenseService service;
 
     @Test
-    @DisplayName("Should update an expense")
-    void shouldUpdateAnExpense() {
+    @DisplayName("Should throw exception when expense not found")
+    void shouldThrowExceptionWhenExpenseNotFound() {
         final var expense = ExpenseMock.toEntity();
+        Expense expenseMock = mock(Expense.class);
         final var requestBody = ExpenseMock.toRequest();
-
-        when(repository.findById(any(UUID.class)))
-                .thenReturn(Optional.of(expense));
 
         final var updatedExpense = new Expense(
                 expense.getId(),
-                requestBody.namePerson(),
+                "Updated Name",
                 requestBody.description(),
                 LocalDateTime.parse(requestBody.dateTime()),
                 requestBody.amount()
         );
 
-        when(repository.save(updatedExpense))
+        when(repository.save(any(Expense.class)))
                 .thenReturn(updatedExpense);
 
-        final var serviceResponse = service.updateExpense(requestBody, expense.getId());
-        assertThat(expense.getId()).isEqualTo(updatedExpense.getId());
-        assertThat(serviceResponse.getBody()).isEqualTo("Expense updated");
-        assertThat(serviceResponse.getStatusCodeValue()).isEqualTo(204);
+        assertThrows(RuntimeException.class, () -> service.updateExpense(requestBody, expense.getId()));
     }
 }
