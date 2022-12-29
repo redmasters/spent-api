@@ -30,8 +30,8 @@ class DeleteExpenseServiceTest {
     DeleteExpenseService service;
 
     @Test
-    @DisplayName("Should delete an expense")
-    void shouldDeleteAnExpense() {
+    @DisplayName("Should set a an expense as deleted true")
+    void shouldSetDeleteExpenseTrue() {
         Expense expense = ExpenseMock.toEntity();
 
         when(repository.findById(any(UUID.class)))
@@ -44,7 +44,5 @@ class DeleteExpenseServiceTest {
         ResponseEntity<String> deletedExpense = service.deleteLogicBy(expenseToDelete.getId());
         assertThat(deletedExpense.getStatusCode().value()).isEqualTo(200);
         assertThat(expense.isDeleted()).isTrue();
-
-
     }
 }
