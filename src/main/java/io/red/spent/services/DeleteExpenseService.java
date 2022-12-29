@@ -31,7 +31,14 @@ public class DeleteExpenseService {
         repository.save(expense);
         return ResponseEntity.status(200).body("Expense deleted");
 
+    }
 
+    public void deleteExpenseBy(UUID id) {
+        LOGGER.info("Deleting expense with id {}", id);
+        final var expense = repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Expense not found"));
 
+        repository.delete(expense);
+        LOGGER.info("Expense Deleted");
     }
 }
