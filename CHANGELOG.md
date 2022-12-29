@@ -1,8 +1,11 @@
 # CHANGELOG
 
 ## [Unreleased]
-* Configure docker;
 
+
+## [v1.9.0]() - 2022-12-29
+### Added
+* Configure docker;
 
 ## [v1.8.0]() - 2022-12-29
 ### Added
