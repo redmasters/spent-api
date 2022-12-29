@@ -36,7 +36,7 @@ public class UpdateExpenseService {
        LOGGER.info("Saving updated expense with id: {}", id);
        repository.save(updatedExpense);
 
-        return ResponseEntity.status(204).body("Expense updated");
+        return ResponseEntity.status(200).body("Expense updated");
     }
 
 

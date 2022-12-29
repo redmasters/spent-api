@@ -2,24 +2,28 @@ package io.red.spent.services;
 
 import io.red.spent.controllers.responses.ExpenseResponse;
 import io.red.spent.mocks.ExpenseMock;
+import io.red.spent.models.Expense;
 import io.red.spent.repositories.ExpenseRepository;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.util.ReflectionTestUtils;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
@@ -35,13 +39,18 @@ class ListExpensesServiceTest {
     @Test
     @DisplayName("Should return a paginated list of all expenses")
     void shouldReturnListOfAllExpenses() {
-        Pageable page = Pageable.unpaged();
+        PageRequest pageable = mock(PageRequest.class);
 
-        final var pageExpense = ExpenseMock.toPage(page);
-        when(repository.findAll(page)).thenReturn(pageExpense);
+        List<Expense> responseList = List.of(ExpenseMock.toEntity());
 
-        Page<ExpenseResponse> responseList = services.listAll(page);
-        Assertions.assertFalse(responseList.isEmpty());
+        Page<Expense> expensePage = new PageImpl<>(
+                responseList, pageable, responseList.size());
+
+        when(repository.findAllByDeleted(any(Boolean.class), any(Pageable.class)))
+                .thenReturn(expensePage);
+
+        Page<ExpenseResponse> responses = services.listAll(pageable);
+        assertFalse(responses.isEmpty());
     }
 
     @Test
@@ -54,9 +63,7 @@ class ListExpensesServiceTest {
         when(repository.findById(any(UUID.class)))
                 .thenReturn(Optional.of(expense));
 
-        final var responseExpense = services.listBy(UUID.randomUUID());
-        assertNotNull(responseExpense.expenseId());
-        assertNotNull(responseExpense.expenseId());
+        assertThrows(RuntimeException.class, () -> services.listBy(expense.getId()));
 
     }
 }

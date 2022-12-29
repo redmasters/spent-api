@@ -27,7 +27,7 @@ public class ListExpensesService {
 
         List<ExpenseResponse> expenseReponse = new ArrayList<>();
 
-        final var listExpense = repository.findAllByDeleted(false);
+        final var listExpense = repository.findAllByDeleted(false, page);
         LOGGER.info("Found {} expenses", listExpense.getContent().size());
 
         listExpense.forEach(expense -> {

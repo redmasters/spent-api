@@ -36,12 +36,12 @@ class DeleteExpenseServiceTest {
 
         when(repository.findById(any(UUID.class)))
                 .thenReturn(Optional.of(expense));
-        expense.delete();
 
         when(repository.save(any(Expense.class)))
                 .thenReturn(expense);
 
-        ResponseEntity<String> deletedExpense = service.deleteLogicBy(UUID.randomUUID());
+        final var expenseToDelete = ExpenseMock.toEntity();
+        ResponseEntity<String> deletedExpense = service.deleteLogicBy(expenseToDelete.getId());
         assertThat(deletedExpense.getStatusCode().value()).isEqualTo(200);
         assertThat(expense.isDeleted()).isTrue();
 
