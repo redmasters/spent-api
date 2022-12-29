@@ -3,9 +3,11 @@
 ## [Unreleased]
 * Configure docker;
 * Add Configure swagger;
-* Add tags;
-* Tag expenses;
 
+
+## [v1.7.0]() - 2022-12-29
+### Added
+* Add tags;
 
 ## [v1.6.0]() - 2022-12-28
 ### Added
