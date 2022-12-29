@@ -3,7 +3,6 @@ package io.red.spent.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -23,12 +22,6 @@ public class Expense {
     private LocalDateTime dateTime;
     @Column(name = "expense_amount")
     private Double amount;
-
-    @OneToMany(
-            mappedBy = "expense",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true)
-    private List<ExpenseTag> expenseTags;
 
     @Column(name = "expense_deleted")
     private boolean deleted = false;
@@ -79,12 +72,4 @@ public class Expense {
         this.deleted = true;
     }
 
-    public List<ExpenseTag> getExpenseTags() {
-        return expenseTags;
-    }
-
-    public void addTag(String tagName) {
-        ExpenseTag expenseTag = new ExpenseTag(this, new Tag(tagName));
-        expenseTags.add(expenseTag);
-    }
 }

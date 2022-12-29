@@ -63,19 +63,22 @@ public class ExpenseMock {
                 NAME_PERSON,
                 DESCRIPTION,
                 DATE_TIME,
-                AMOUNT);
+                AMOUNT,
+                List.of(TAG_NAME, TAG_NAME));
     }
 
     public static List<ExpenseResponse> toListResponse() {
         List<Expense> expenseList = Arrays.asList(toEntity());
         List<ExpenseResponse> expenseResponseList = new ArrayList<>();
         expenseList.forEach(expense -> {
+
             expenseResponseList.add(new ExpenseResponse(
                     expense.getId(),
                     expense.getNamePerson(),
                     expense.getDescription(),
                     expense.getDateTime().toString(),
-                    expense.getAmount()
+                    expense.getAmount(),
+                    List.of(TAG_NAME)
             ));
         });
         return expenseResponseList;

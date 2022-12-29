@@ -11,30 +11,30 @@ public class Tag {
     private Long tagId;
 
     @Column(name = "tag_description")
-    private String tagDescription;
+    private String description;
 
     public Tag() {
     }
 
-    public Tag(Long tagId, String tagDescription) {
+    public Tag(Long tagId, String description) {
         this.tagId = tagId;
-        this.tagDescription = tagDescription;
+        this.description = description;
     }
 
     public Tag(Long tagId) {
         this.tagId = tagId;
     }
 
-    public Tag(String tagDescription) {
-        this.tagDescription = tagDescription;
+    public Tag(String description) {
+        this.description = description;
     }
 
     public Long getTagId() {
         return tagId;
     }
 
-    public String getTagDescription() {
-        return tagDescription;
+    public String getDescription() {
+        return description;
     }
 }
 

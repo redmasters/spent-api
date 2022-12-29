@@ -1,5 +1,6 @@
 package io.red.spent.controllers.responses;
 
+import java.util.List;
 import java.util.UUID;
 
 public record ExpenseResponse(
@@ -7,6 +8,7 @@ public record ExpenseResponse(
         String namePerson,
         String description,
         String dateTime,
-        Double amount
+        Double amount,
+        List<String>tag
 ) {
 }
