@@ -1,12 +1,16 @@
 # CHANGELOG
 
 ## [Unreleased]
-* Permanent delete an expense;
 * Add exception handler;
 * Configure docker;
 * Add Configure swagger;
 * Add tags;
 * Tag expenses;
+
+
+## [v1.5.0]() - 2022-12-28
+### Added
+* Permanent delete an expense;
 
 ## [v1.4.0]() - 2022-12-28
 ### Added
