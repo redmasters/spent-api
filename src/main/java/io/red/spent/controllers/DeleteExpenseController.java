@@ -19,4 +19,11 @@ public class DeleteExpenseController {
     public ResponseEntity<String> deleteExpenseById(@PathVariable(name = "expenseId") UUID id) {
         return service.deleteLogicBy(id);
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteById(
+            @RequestParam(name = "expenseId") UUID id) {
+        service.deleteExpenseBy(id);
+        return ResponseEntity.status(200).body("Expense deleted");
+    }
 }
