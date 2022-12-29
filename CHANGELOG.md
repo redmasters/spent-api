@@ -2,8 +2,11 @@
 
 ## [Unreleased]
 * Configure docker;
-* Add Configure swagger;
 
+
+## [v1.8.0]() - 2022-12-29
+### Added
+* Configure swagger;
 
 ## [v1.7.0]() - 2022-12-29
 ### Added
