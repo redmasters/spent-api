@@ -23,7 +23,7 @@ public class UpdateExpenseService {
 
     public ResponseEntity<String> updateExpense(ExpenseRequest request, UUID id) {
         LOGGER.info("Updating expense with id: {}", id);
-       final var expense = repository.findById(id)
+       final var expense = repository.findByIdAndDeleted(id, false)
                .orElseThrow(() -> new RuntimeException("Expense not found"));
 
        final var updatedExpense = new Expense(
@@ -36,7 +36,7 @@ public class UpdateExpenseService {
        LOGGER.info("Saving updated expense with id: {}", id);
        repository.save(updatedExpense);
 
-        return ResponseEntity.status(204).body("Expense updated");
+        return ResponseEntity.status(200).body("Expense updated");
     }
 
 

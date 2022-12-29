@@ -32,6 +32,7 @@ public class ExpenseMock {
                 AMOUNT);
     }
 
+
     public static ExpenseRequest toRequest() {
         return new ExpenseRequest(
                 NAME_PERSON,
