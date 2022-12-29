@@ -1,5 +1,6 @@
 package io.red.spent.services;
 
+import io.red.spent.controllers.exceptions.ExpenseException;
 import io.red.spent.controllers.requests.ExpenseRequest;
 import io.red.spent.models.Expense;
 import io.red.spent.repositories.ExpenseRepository;
@@ -24,7 +25,7 @@ public class UpdateExpenseService {
     public ResponseEntity<String> updateExpense(ExpenseRequest request, UUID id) {
         LOGGER.info("Updating expense with id: {}", id);
        final var expense = repository.findByIdAndDeleted(id, false)
-               .orElseThrow(() -> new RuntimeException("Expense not found"));
+               .orElseThrow(() -> new ExpenseException("Expense not found"));
 
        final var updatedExpense = new Expense(
                 expense.getId(),
