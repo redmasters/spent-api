@@ -44,7 +44,5 @@ class DeleteExpenseServiceTest {
         ResponseEntity<String> deletedExpense = service.deleteLogicBy(expenseToDelete.getId());
         assertThat(deletedExpense.getStatusCode().value()).isEqualTo(200);
         assertThat(expense.isDeleted()).isTrue();
-
-
     }
 }
