@@ -3,6 +3,10 @@
 ## [Unreleased]
 
 
+## [v1.9.1]() - 2023-01-02
+### Fixed
+- Fixed a bug that caused to fail in contextLoad() test;
+
 ## [v1.9.0]() - 2022-12-29
 ### Added
 * Configure docker;
