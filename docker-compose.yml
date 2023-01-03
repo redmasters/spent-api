@@ -1,18 +1,6 @@
 version: '3.1'
 
 services:
-  db:
-    image: postgres
-    container_name: db_spent
-    restart: always
-    ports:
-      - 5432:5432
-    environment:
-      POSTGRES_USER: spent-app
-      POSTGRES_PASSWORD: spent-app
-    volumes:
-      - /private/var/lib/postgresql:/var/lib/postgresql
-
   api:
     container_name: spent-app
     image: spent:1.9.0
