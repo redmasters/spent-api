@@ -3,9 +3,9 @@ spring:
     name: spent-api
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/SPENT-APP
-    username: postgres
-    password: postgres
+    url: 'postgresql://${{ PGUSER }}:${{ PGPASSWORD }}@${{ PGHOST }}:${{ PGPORT }}/${{ PGDATABASE }}'
+    username: '${PGUSER}'
+    password: '${PGPASSWORD}'
     driver-class-name: org.postgresql.Driver
 
   jpa:
