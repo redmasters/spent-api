@@ -21,7 +21,6 @@ WORKDIR $APP_HOME
 #
 COPY --chown=gradle:gradle build.gradle settings.gradle $APP_HOME/
 COPY --chown=gradle:gradle src $APP_HOME/src
-COPY --chown=gradle:gradle config $APP_HOME/config
 
 #
 # Build the application.
