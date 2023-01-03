@@ -1,46 +1,24 @@
-#
-# Set a variable that can be used in all stages.
-#
-ARG BUILD_HOME=spent-api
-
-#
-# Gradle image for the build stage.
-#
-FROM gradle:jdk17-alpine as build-image
-
-#
-# Set the working directory.
-#
-ARG BUILD_HOME
-ENV APP_HOME=$BUILD_HOME
+FROM gradle:7.6.0-jdk17-alpine AS TEMP_BUILD_IMAGE
+ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
+COPY build.gradle settings.gradle $APP_HOME
 
-#
-# Copy the Gradle config, source code, and static analysis config
-# into the build container.
-#
-COPY --chown=gradle:gradle build.gradle settings.gradle $APP_HOME/
-COPY --chown=gradle:gradle src $APP_HOME/src
+COPY gradle $APP_HOME/gradle
+COPY --chown=gradle:gradle . /home/gradle/src
+USER root
+RUN chown -R gradle /home/gradle/src
 
-#
-# Build the application.
-#
-RUN gradle --no-daemon build
+RUN gradle build || return 0
+COPY . .
+RUN gradle clean build
 
-#
-# Java image for the application to run in.
-#
+# actual container
 FROM openjdk:17-alpine
+ENV ARTIFACT_NAME=spent-1.9.0.jar
+ENV APP_HOME=/usr/app/
 
-#
-# Copy the jar file in and name it app.jar.
-#
-ARG BUILD_HOME
-ENV APP_HOME=$BUILD_HOME
-COPY --from=build-image $APP_HOME/build/libs/spent-1.9.0.jar app.jar
+WORKDIR $APP_HOME
+COPY --from=TEMP_BUILD_IMAGE $APP_HOME/build/libs/$ARTIFACT_NAME .
 
-#
-# The command to run when the container starts.
-#
 EXPOSE 8080
-ENTRYPOINT java -jar app.jar
+ENTRYPOINT exec java -jar ${ARTIFACT_NAME}

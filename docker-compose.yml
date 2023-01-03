@@ -15,6 +15,3 @@ services:
       SPRING_DATASOURCE_USERNAME: spent-app
       SPRING_DATASOURCE_PASSWORD: spent-app
       SPRING_JPA_HIBERNATE_DDL_AUTO: update
-    depends_on:
-      - db
-
