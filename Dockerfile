@@ -1,7 +1,6 @@
 FROM openjdk:17-alpine
-COPY build/libs/*.jar /app.jar
-WORKDIR /src
-COPY . /src
-RUN gradle clean build
+WORKDIR /usr/app
+COPY . /build/libs/spent-1.9.0.jar /usr/app/spent-1.9.0.jar/
+RUN ./gradlew bootJar
+ENTRYPOINT exec java -jar spent-1.9.0.jar
 EXPOSE 8080
-ENTRYPOINT ["java","-jar","/app.jar", "build/libs/*.jar"]
